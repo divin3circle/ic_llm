@@ -4,7 +4,10 @@
   "description": "A library for making requests to the LLM canister on the Internet Computer.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -14,5 +17,13 @@
     "AI"
   ],
   "author": "divin3circle",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@dfinity/agent": "^2.3.0",
+    "@dfinity/principal": "^2.3.0"
+  }
 }
