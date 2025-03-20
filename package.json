@@ -1,20 +1,30 @@
 {
-  "name": "ic_llm",
+  "name": "icp-llm-client",
   "version": "1.0.0",
-  "description": "A library for making requests to the LLM canister on the Internet Computer.",
-  "main": "index.js",
+  "description": "A TypeScript client for interacting with the LLM canister on the Internet Computer",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
     "start": "node dist/index.js",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "github.com/divin3circle/ic_llm"
   },
   "keywords": [
-    "AI"
+    "icp",
+    "internet-computer",
+    "llm",
+    "ai",
+    "dfinity"
   ],
   "author": "divin3circle",
   "license": "MIT",

@@ -1,0 +1,11 @@
+src/
+.git/
+.gitignore
+.npmignore
+tsconfig.json
+*.log
+node_modules/
+coverage/
+.vscode/
+.idea/
+*.tsbuildinfo 
