@@ -22,8 +22,25 @@ const idlFactory = ({ IDL }: { IDL: any }) => {
   });
 };
 
-export const createActor = (canisterId: string, identity?: Identity) => {
-  const agent = new HttpAgent({ identity });
+export const createActor = (
+  canisterId: string,
+  agentOrIdentity?: HttpAgent | Identity
+) => {
+  let agent: HttpAgent;
+
+  if (!agentOrIdentity) {
+    // No agent or identity provided, create a default agent for mainnet
+    agent = new HttpAgent({ host: "https://ic0.app" });
+  } else if (agentOrIdentity instanceof HttpAgent) {
+    // An agent was provided directly
+    agent = agentOrIdentity;
+  } else {
+    // An identity was provided, create an agent with it
+    agent = new HttpAgent({
+      identity: agentOrIdentity,
+      host: "https://ic0.app", // Default to mainnet
+    });
+  }
 
   // For local development only
   if (process.env.NODE_ENV !== "production") {

@@ -11,6 +11,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Placeholder for future changes
 
+## [1.1.0] - 2024-03-22
+
+### Added
+
+- Support for custom host configuration via options object
+- Better compatibility with frontend frameworks and different environments
+- Improved flexibility for local development vs production usage
+
+### Changed
+
+- Modified constructor to accept an options object with identity and host parameters
+- Updated createActor function to accept either an Identity or HttpAgent
+- Enhanced developer experience when using in different IC environments
+
+### Fixed
+
+- Fixed "Canister not found" errors when used in local development environments
+- Improved compatibility with React and other frontend frameworks
+
 ## [1.0.0] - 2024-03-21
 
 ### Added
@@ -46,4 +65,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error handling examples
 - Limitations documentation
 
+[1.1.0]: https://github.com/divin3circle/ic_llm/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/divin3circle/ic_llm/releases/tag/v1.0.0

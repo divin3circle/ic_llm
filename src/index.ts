@@ -1,6 +1,7 @@
 import { ActorSubclass, Identity } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
 import { createActor } from "./utils/actor";
+import { HttpAgent } from "@dfinity/agent";
 
 export enum Model {
   Llama3_1_8B = "llama3.1:8b",
@@ -24,8 +25,15 @@ export class LLMClient {
   private static MAX_MESSAGES = 10;
   private static MAX_PROMPT_SIZE = 10 * 1024;
 
-  constructor(identity?: Identity) {
-    this.actor = createActor(LLMClient.CANISTER_ID, identity);
+  constructor(options?: { identity?: Identity; host?: string }) {
+    // Create an agent with the provided options
+    const agent = new HttpAgent({
+      identity: options?.identity,
+      host: options?.host || "https://ic0.app", // Default to mainnet
+    });
+
+    // We need to update createActor to accept an agent instead of creating one
+    this.actor = createActor(LLMClient.CANISTER_ID, agent);
   }
 
   private validateMessages(messages: ChatMessage[]): void {

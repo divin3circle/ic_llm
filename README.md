@@ -13,7 +13,7 @@ npm install icp-llm-client
 ```typescript
 import { LLMClient, Model } from "icp-llm-client";
 
-// Create a client instance
+// Create a client instance (connects to IC mainnet by default)
 const client = new LLMClient();
 
 // Simple prompt
@@ -33,6 +33,27 @@ const chatResponse = await client.chat(Model.Llama3_1_8B, [
     content: "What is the Internet Computer?",
   },
 ]);
+```
+
+### Custom Host or Identity
+
+You can specify a custom host or identity:
+
+```typescript
+import { LLMClient, Model } from "icp-llm-client";
+import { HttpAgent, Identity } from "@dfinity/agent";
+
+// Create a client with custom host (e.g., local development)
+const localClient = new LLMClient({ host: "http://localhost:8000" });
+
+// Create a client with custom identity
+const identityClient = new LLMClient({ identity: myIdentity });
+
+// Create a client with both custom host and identity
+const customClient = new LLMClient({
+  host: "https://custom-ic-host.com",
+  identity: myIdentity,
+});
 ```
 
 ## Limitations
@@ -61,7 +82,7 @@ const chatResponse = await client.chat(Model.Llama3_1_8B, [
 
    ```typescript
    const response = await client.prompt(Model.Llama3_1_8B, "Your prompt");
-   if (response.length >= 200) {
+   if (LLMClient.isResponseTruncated(response)) {
      console.log("Response was truncated. Consider breaking up your request.");
    }
    ```
