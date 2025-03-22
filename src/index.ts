@@ -32,7 +32,22 @@ export class LLMClient {
       host: options?.host || "https://ic0.app", // Default to mainnet
     });
 
-    // We need to update createActor to accept an agent instead of creating one
+    // Make sure to fetch the root key when in development and not connecting to mainnet
+    if (
+      process.env.NODE_ENV !== "production" &&
+      options?.host &&
+      options.host !== "https://ic0.app"
+    ) {
+      try {
+        agent.fetchRootKey();
+      } catch (err) {
+        console.warn(
+          "Unable to fetch root key. Check if your replica is running"
+        );
+        console.error(err);
+      }
+    }
+
     this.actor = createActor(LLMClient.CANISTER_ID, agent);
   }
 
